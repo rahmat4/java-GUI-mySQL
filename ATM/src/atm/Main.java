@@ -144,8 +144,18 @@ public class Main {
             System.out.print("Tarik tunai Rp.");
             int saldo1 = Integer.parseInt(input.readLine());
             
+            ResultSet res = conn.createStatement().executeQuery("SELECT * FROM nasabah WHERE no_rekening='"+no_rekening+"'");
+            
+            while(res.next()){
+                no_rekening = res.getInt("no_rekening");
+                String nama = res.getString("nama");
+                saldo = res.getInt("saldo");
+                
+                //System.out.printf(String.format("         %d                 %s              Rp.%d         \n",no_rekening,nama,saldo));
+            }
+            
             if(saldo >= saldo1){
-                saldo = (saldo - saldo1);
+                saldo-=saldo1;
                 conn.createStatement().execute("UPDATE nasabah SET saldo='"+saldo+"' WHERE no_rekening='"+no_rekening+"'");
             }else{
                 System.out.println("Uang anda tidak cukup!!!");
@@ -161,8 +171,17 @@ public class Main {
             int no_rekening = Integer.parseInt(input.readLine());
             System.out.print("Tambah saldo Rp.");
             int saldo1 = Integer.parseInt(input.readLine());
-            saldo = (saldo + saldo1);
+            ResultSet res = conn.createStatement().executeQuery("SELECT * FROM nasabah WHERE no_rekening='"+no_rekening+"'");
             
+            while(res.next()){
+                no_rekening = res.getInt("no_rekening");
+                String nama = res.getString("nama");
+                saldo = res.getInt("saldo");
+                
+                //System.out.printf(String.format("         %d                 %s              Rp.%d         \n",no_rekening,nama,saldo));
+            }
+            
+            saldo+=saldo1;
             conn.createStatement().execute("UPDATE nasabah SET saldo='"+saldo+"' WHERE no_rekening='"+no_rekening+"'");
         }catch(IOException | NumberFormatException | SQLException e){
             System.out.println(e);
