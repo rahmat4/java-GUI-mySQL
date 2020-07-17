@@ -118,7 +118,7 @@ public class Main {
             System.out.print("no_rekening  : ");
             int no_rekening = Integer.parseInt(input.readLine());
             
-            ResultSet res = conn.createStatement().executeQuery("SELECT * FROM nasabah WHERE no_rekening='"+no_rekening+"'");
+            ResultSet res = conn.createStatement().executeQuery("SELECT * FROM nasabah WHERE no_rekening LIKE '%"+no_rekening+"%'");
             
             System.out.println("\n+----------------------------------------------------------------------+");
             System.out.println("|        no_rekening        |        nama        |        saldo        |");
